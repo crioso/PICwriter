@@ -63,7 +63,7 @@ class MMI1x2(tk.Component):
         self.width = width
 
         self.totlength = length
-
+        self.wg_sep = width / 3.0 if wg_sep == None else wg_sep
         if (output_length != None) and (output_wg_sep != None):
             self.output_length = output_length
             self.output_wg_sep = output_wg_sep
@@ -72,7 +72,7 @@ class MMI1x2(tk.Component):
             self.totlength += self.output_length
         elif (output_length == None) and (output_wg_sep == None):
             self.draw_outputs = False
-            self.output_wg_sep = wg_sep
+            self.output_wg_sep = self.wg_sep
         else:
             raise ValueError(
                 "Warning! One of the two output values was None, and the other was provided.  Both must be provided *OR* omitted."
@@ -89,8 +89,6 @@ class MMI1x2(tk.Component):
             raise ValueError(
                 "Warning! One of the two input values was None, and the other was provided.  Both must be provided *OR* omitted."
             )
-
-        self.wg_sep = width / 3.0 if wg_sep == None else wg_sep
 
         self.resist = wgt.resist
         self.wg_spec = {"layer": wgt.wg_layer, "datatype": wgt.wg_datatype}
